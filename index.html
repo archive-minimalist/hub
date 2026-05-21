@@ -339,9 +339,10 @@
         <div id="connect" class="section-card">
             <h2 class="section-title">PR & Collaborations</h2>
             <p style="font-size: 0.8rem; color: var(--accent-color); margin-bottom: 1rem;">Direct connection for brands & creators.</p>
-            <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent completely anonymously.');">
-                <input type="text" placeholder="Brand Name / Agency" required>
-                <input type="email" placeholder="Contact Email Address" required>
+            <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                <input type="text" name="name" placeholder="Brand Name / Agency" required>
+<input type="email" name="email" placeholder="Contact Email Address" required>
+<textarea rows="4" name="message" placeholder="Briefly outline your proposal..." required></textarea>
                 <textarea rows="4" placeholder="Briefly outline your concept or campaign details..." required></textarea>
                 <button type="submit" class="submit-btn">Send Proposal</button>
             </form>
