@@ -335,22 +335,20 @@
             </div>
         </div>
 
-        <!-- SECTION 4: Direct PR Contact Form -->
-        <div id="connect" class="section-card">
-            <h2 class="section-title">PR & Collaborations</h2>
-            <p style="font-size: 0.8rem; color: var(--accent-color); margin-bottom: 1rem;">Direct connection for brands & creators.</p>
-            <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                <input type="text" name="name" placeholder="Brand Name / Agency" required>
-<input type="email" name="email" placeholder="Contact Email Address" required>
-<textarea rows="4" name="message" placeholder="Briefly outline your proposal..." required></textarea>
-                <textarea rows="4" placeholder="Briefly outline your concept or campaign details..." required></textarea>
-                <button type="submit" class="submit-btn">Send Proposal</button>
-            </form>
-        </div>
-
-        <footer>
-            &copy; 2026 ARCHIVES.MINIMALIST &bull; SILENT VISUAL CURATION
-        </footer>
+      <div id="connect" class="section-card">
+    <h2 class="section-title">PR & Collaborations</h2>
+    <p style="font-size: 0.8rem; color: var(--accent-color);">Direct connection for brands & creators.</p>
+    
+    <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="46a7d902-ad54-46a7-8ab6-7d162dc2b868">
+        
+        <input type="text" name="brand_name" placeholder="Brand Name / Agency" required>
+        <input type="email" name="client_email" placeholder="Contact Email Address" required>
+        <textarea rows="4" name="proposal_details" placeholder="Briefly outline your concept or campaign details..." required></textarea>
+        
+        <button type="submit" class="submit-btn">SEND PROPOSAL</button>
+    </form>
+</div>
     </div>
 
 </body>
