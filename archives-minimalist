@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Archive | Multi-Hub</title>
+    <style>
+        :root {
+            --bg-color: #f4f1ea;
+            --card-bg: #ffffff;
+            --text-color: #111111;
+            --accent-color: #7a756b;
+            --border-color: rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .hub-container {
+            max-width: 600px;
+            width: 100%;
+            margin-top: 2rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Profile Header */
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .avatar-circle {
+            width: 85px;
+            height: 85px;
+            background: #e3dec3;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .handle {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        /* Smooth Navigation Bar */
+        .nav-hub {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .nav-hub a {
+            text-decoration: none;
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+        }
+
+        .nav-hub a:hover {
+            color: var(--text-color);
+        }
+
+        /* Dynamic Content Sections */
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            border-left: 2px solid var(--text-color);
+            padding-left: 0.5rem;
+        }
+
+        /* Feature 1: The Quick Links Drop */
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .link-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .link-item:hover {
+            background: var(--bg-color);
+            transform: translateX(3px);
+        }
+
+        /* Expanded Sub-content Blocks */
+        .expanded-content {
+            margin-top: 0.5rem;
+            padding: 1rem;
+            background: var(--bg-color);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #444;
+            border: 1px solid var(--border-color);
+        }
+
+        .expanded-content ul {
+            margin-top: 0.5rem;
+            padding-left: 1.2rem;
+        }
+
+        .expanded-content li {
+            margin-bottom: 0.4rem;
+        }
+
+        .highlight-text {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        /* Feature 2: Visual Moodboard Grid */
+        .mood-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .grid-photo {
+            aspect-ratio: 1;
+            background: #e8e4d9;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--accent-color);
+            transition: opacity 0.3s;
+        }
+
+        .grid-photo:hover { opacity: 0.8; }
+
+        /* Feature 3: Micro-Blog / Daily Logs */
+        .log-entry {
+            border-bottom: 1px dashed var(--border-color);
+            padding: 0.75rem 0;
+        }
+        .log-entry:last-child { border-bottom: none; }
+        .log-date { font-size: 0.7rem; color: var(--accent-color); text-transform: uppercase; }
+        .log-text { font-size: 0.85rem; margin-top: 0.2rem; line-height: 1.4; color: #333; }
+
+        /* Feature 4: Anonymous PR Contact Form */
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--text-color);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.85rem;
+            background: var(--text-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .submit-btn:hover { opacity: 0.9; }
+
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin: 3rem 0;
+            text-transform: uppercase;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hub-container">
+        <!-- Main Brand Header -->
+        <header>
+            <div class="avatar-circle">AM</div>
+            <h1>Minimalist Archive</h1>
+            <div class="handle">@archives.minimalist</div>
+            <p style="font-size: 0.9rem; font-weight: 300; line-height: 1.5; max-width: 450px; margin: 0 auto; color: #444;">
+                A multi-dimensional digital matrix preserving timeless structures, soft analog lighting, and silent luxury.
+            </p>
+        </header>
+
+        <!-- Dynamic Navigation Menu -->
+        <nav class="nav-hub">
+            <a href="#directory">Directory</a>
+            <a href="#visuals">Visual Archive</a>
+            <a href="#logs">Editorial Log</a>
+            <a href="#connect">Connect</a>
+        </nav>
+
+        <!-- SECTION 1: Connect Links & Expanded Content Portals -->
+        <div id="directory" class="section-card">
+            <h2 class="section-title">Directory</h2>
+            <div class="links-list">
+                
+                <!-- Link 1: Instagram Portal -->
+                <a href="https://instagram.com/archives.minimalist" target="_blank" class="link-item">
+                    <span>Instagram Portal</span> <span>→</span>
+                </a>
+                
+                <!-- Expanded Feature 2: Campaign Lookbook Module -->
+                <div style="margin-top: 0.5rem;">
+                    <div class="link-item" style="background: rgba(0,0,0,0.02); font-weight: 500;">
+                        <span>PR Campaign Moodboard [Current Focus]</span>
+                    </div>
+                    <div class="expanded-content">
+                        <span class="highlight-text">Direction: Silent Luxury & High-End Branding</span><br>
+                        Our perspective on modern PR curation, focusing entirely on atmosphere and premium styling.
+                        <ul>
+                            <li><span class="highlight-text">Visual Tones:</span> High-contrast shadows, muted cream balances, and rich, deep blacks.</li>
+                            <li><span class="highlight-text">Aesthetic Rules:</span> Heavy utilization of negative space, zero-clutter frames, and macro details.</li>
+                            <li><span class="highlight-text">Core Focus:</span> Elevating brand placements through subtle, understated background storytelling.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Expanded Feature 3: Aesthetic Production Kits Module -->
+                <div style="margin-top: 0.5rem;">
+                    <div class="link-item" style="background: rgba(0,0,0,0.02); font-weight: 500;">
+                        <span>Media Curation & Assets</span>
+                    </div>
+                    <div class="expanded-content">
+                        <span class="highlight-text">Digital Production Kit v1.0</span><br>
+                        The exact technical specifications used to maintain our signature high-fidelity, faceless look.
+                        <ul>
+                            <li><span class="highlight-text">Camera Profile:</span> Soft analog color grades paired with organic 35mm film grain overlays.</li>
+                            <li><span class="highlight-text">Lighting Setup:</span> Single-source, natural directional lighting to capture depth.</li>
+                            <li><span class="highlight-text">Movement:</span> Minimalist tracking shots and 0.5x motion blur loops for premium pacing.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 2: Visual Moodboard Matrix -->
+        <div id="visuals" class="section-card">
+            <h2 class="section-title">Visual Archive</h2>
+            <p style="font-size: 0.8rem; color: var(--accent-color); margin-bottom: 0.75rem;">A static preview of current tones and textures.</p>
+            <div class="mood-grid">
+                <div class="grid-photo">🎞️</div>
+                <div class="grid-photo">🪐</div>
+                <div class="grid-photo">☕</div>
+                <div class="grid-photo">🧱</div>
+                <div class="grid-photo">☁️</div>
+                <div class="grid-photo">💼</div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Micro-Blog / Updates Log -->
+        <div id="logs" class="section-card">
+            <h2 class="section-title">Editorial Log</h2>
+            <div class="log-entry">
+                <div class="log-date">Entry 01 // Current Aesthetic</div>
+                <div class="log-text">Focusing heavily on soft morning shadows, muted earth tones, and the clean visual composition of modern architectural spaces.</div>
+            </div>
+            <div class="log-entry">
+                <div class="log-date">Entry 02 // Project Focus</div>
+                <div class="log-text">Developing a silent luxury PR framework for premium lifestyle brands. Minimalist lines only.</div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Direct PR Contact Form -->
+        <div id="connect" class="section-card">
+            <h2 class="section-title">PR & Collaborations</h2>
+            <p style="font-size: 0.8rem; color: var(--accent-color); margin-bottom: 1rem;">Direct connection for brands & creators.</p>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent completely anonymously.');">
+                <input type="text" placeholder="Brand Name / Agency" required>
+                <input type="email" placeholder="Contact Email Address" required>
+                <textarea rows="4" placeholder="Briefly outline your concept or campaign details..." required></textarea>
+                <button type="submit" class="submit-btn">Send Proposal</button>
+            </form>
+        </div>
+
+        <footer>
+            &copy; 2026 ARCHIVES.MINIMALIST &bull; SILENT VISUAL CURATION
+        </footer>
+    </div>
+
+</body>
+</html>
